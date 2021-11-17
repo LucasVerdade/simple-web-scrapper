@@ -1,9 +1,9 @@
 const Cheerio = require('cheerio');
 const axios = require('axios');
 
-async function getNthLastPosts(nthLastPosts=1) {
+async function getNthLastPosts(nthLastPosts=1, subreddit="brasil") {
     try {
-        const { data } = await axios.get("https://old.reddit.com/r/brasil/new/");
+        const { data } = await axios.get(`https://old.reddit.com/r/${subreddit}/new/`);
         const $ = Cheerio.load(data);
 
         const postList = $("div[id^=thing]");
