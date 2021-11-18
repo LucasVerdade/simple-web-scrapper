@@ -1,11 +1,22 @@
 version: "3"
 
 services: 
-  app: 
-    build: .
-    command: npm start
+  backend: 
+    build: 
+      context: ./backend
+      dockerfile: ./Dockerfile
+    image: "lucasv/simplewebscrapper"
+    ports:
+      - "5000:5000"
+      
+
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    image: "lucasv/simplereactapp"
     ports:
       - "3000:3000"
-    volumes:
-    - .:/usr/app
-    
+    links:
+    - "backend:be"
+
