@@ -1,10 +1,13 @@
-const express = require('express');
-const getNthLastPosts = require('./crawler.js')
+var express = require('express');
+var getNthLastPosts = require('./crawler.js')
+var cors = require('cors');
 
 const PORT = 5000;
 const HOST = '0.0.0.0';
  
 const app = express();
+app.use(cors());
+
 app.get('/', async (req, res) => {
     const result = await getNthLastPosts();
     res.send([...result]);
